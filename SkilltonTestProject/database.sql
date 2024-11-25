@@ -536,13 +536,22 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE [dbo].[GetMaxIdEmployeeProc]
-	@MaxId [int]=0 OUTPUT
+CREATE PROCEDURE [dbo].[UpdateEmployee] 
+	@EmployeeID [int],
+	@FirstName [nvarchar](50),
+	@LastName [nvarchar](50),
+	@Email [nvarchar](100),
+	@DateOfBirth [date],
+	@Salary [decimal]
 AS
 BEGIN
-	SELECT @MaxId= MAX(EmployeeId) FROM dbo.Employees
-	-- Declare the return variable here
-	RETURN @MaxId
+	UPDATE Employees 
+		SET FirstName=@FirstName,
+			LastName=@LastName,
+			Email=@Email,
+			DateOfBirth=@DateOfBirth,
+			Salary=@Salary
+		WHERE @EmployeeID=@EmployeeID
 END
 GO
 
